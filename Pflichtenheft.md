@@ -12,7 +12,7 @@ Bearbeitet von:
 * Đức Hùng Nguyễn
 * Oliver von Seydlitz
 
-Autraggeber: Prof. Dr. Hauptmann
+Auftraggeber: Prof. Dr. Hauptmann
 
 ## Problemstellung und Systemziel
 
@@ -26,54 +26,240 @@ Es soll ein Software-System entwickelt werden, über das die Terminplanung gereg
 * Organisation muss dezentral sein um den Prüfer zu entlasten
 
 ## Systemkontext
-![Kontexdiagramm](diagrams/kontext.jpg)
+Der Kontext des Systems wird durch folgendes Diagramm beschrieben:
+
+![Kontexdiagramm](diagrams/awf-kontext.jpg)
 
 ## Benutzerschnittstelle
+TODO
 
 ## Anforderungen
 
 ### Funktionale Anforderungen
 
 #### Überblick
+Die folgende Tabelle gibt einen Überblick über die essentiellen Gruppen und essentiellen Funktionen, sowie deren Auslöser und Reaktionen:
 
-Funktionale Anforderung | Auslöser (Eingabe) | Reaktion (Ausgabe)
-------------------------|--------------------|------------------
+Anwendungsfall | Auslöser | Reaktion
+---------------|----------|---------
 **Prüfungstermine verwalten** | |
-Termine generieren | Starttermin |
-Termin als frei markieren | Termin |
-Termin blockieren | Termin |
-Termine anzeigen | | Terminübersicht
-**Gruppen verwalten** (Lehrende)| |
-Gruppe anlegen | Gruppenname |
-Gruppe löschen | Gruppenname |
-Gruppen anzeigen | | Gruppenübersicht
+Termine und Gruppen generieren | Startdatum + Anzahl Gruppen | Termine + Gruppen
+Termin als frei markieren | Termin | Termin (neu)
+Termin deaktivieren | Termin | Termin (neu)
+Zeitfenster bearbeiten | Termin + Zeitfenster | Termin (neu)
+Bemerkung bearbeiten | Termin + Bemerkung | Termin (neu)
+Raum und Endzeit festlegen | Termin + Raum + Endzeit | Termin (neu)
+Termine exportieren | | Termine
+**Termine anzeigen** | |
+Termine anzeigen | | Termine
+**Gruppen verwalten** | |
+Gruppe anlegen | Gruppenname | Gruppe
+Gruppe löschen | Gruppe |
+Gruppen anzeigen | | Gruppen
 **Prüfungstermine anzeigen und buchen** | |
-Termine anzeigen | | Terminübersicht
-Termin reservieren | Reservierungswunsch |
-Reservierten Termin stornieren | |
-Termin verbindlich buchen | Buchungswunsch |
+Termin reservieren | Gruppe + Termin |
+Reservierten Termin stornieren | Termin |
+Termin buchen | Gruppe + Termin + Startzeit |
 
-#### Prüfungstermine verwalten (Lehrende)
-![AWF-Diagramm Termine verwalten Lehrende](diagrams/awf-termine-lehrende.jpg)
-* Das System muss der Lehrenden die Möglichkeit bieten
+Die essentiellen Gruppen sind ferner in folgendem Anwendungsfalldiagramm dargestellt. Abstrakte Anwendungsfälle sind dabei kursiv geschrieben.
+
+![AWF-Diagramm Überblick](diagrams/awf-ueberblick.jpg)
+
+##### Struktur der Auslöser und Reaktionen
+Termin =
+  Datum
+  \+ Zeitfenster
+  \+ Terminzustand
+  \+ Bemerkung
+  \+ \(
+    Reservierung
+    | Buchung
+    \)
+
+Termine = {Termin}
+
+Zeitfenster = Startzeit \+ Endzeit
+
+Terminzustand = frei | deaktiviert | reserviert | gebucht
+
+Reservierung = Gruppe
+
+Buchung = Gruppe \+ Startzeit \+ \(Endzeit\) \+ \(Raum\)
+
+Gruppe = Gruppenname \+ Buchungsstatus
+
+Buchungsstatus = gebucht | noch nicht gebucht
+
+Gruppen = {Gruppe}
+
+Die anderen Auslöser und Reaktionen sind atomare Werte.
+
+
+Es folgen nun die Beschreibungen aller Anwendungsfälle.
+
+
+#### Termine verwalten
+Folgendes Anwendungsfalldiagramm gibt einen Überblick über die Anwendungsfälle der essentiellen Gruppe "Termine verwalten":
+
+![AWF-Diagramm Termine verwalten Lehrende](diagrams/awf-termine-verwalten.jpg)
+
+##### Termine und Gruppen generieren
+Die Funktion "Termine und Gruppen generieren"
+* muss dem Administrator die Möglichkeit bieten, die 15 Termine eines Prüfungszeitraums sowie die Gruppen dieses Zeitraums anzulegen.
+
+Termine = {
+  Tag
+  \+ Zeitfenster
+  \+  
+}
+
+Folgendes Aktivitätsdiagramm verdeutlicht dies:
+
+![Aktivitätsdiagramm Termine und Gruppen generieren](diagrams/ad-termine-gruppen-generieren.jpg)
+
+##### Termin als frei markieren
+Die Funktion "Termin als frei markieren"
+* muss dem Administrator die Möglichkeit bieten, einen Termin als frei zu markieren.
+* muss beim frei markieren eine ggf. vorhandene Reservierung oder Buchung löschen.
+
+Folgendes Aktivitätsdiagramm verdeutlicht dies:
+
+![Aktivitätsdiagramm Termin frei markieren](diagrams/ad-termin-frei-markieren.jpg)
+
+##### Termin deaktivieren
+Die Funktion "Termin deaktivieren"
+* muss dem Administrator die Möglichkeit bieten, einen Termin zu deaktivieren.
+* muss beim Deaktivieren eine ggf. vorhandene Reservierung oder Buchung löschen
+
+Folgendes Aktivitätsdiagramm verdeutlicht dies:
+
+![Aktivitätsdiagramm Termin deaktivieren](diagrams/ad-termin-deaktivieren.jpg)
+
+##### Zeitfenster bearbeiten
+Die Funktion "Zeitfenster bearbeiten"
+* muss dem Administrator die Möglichkeit bieten, das Zeitfenster eines Termins zu bearbeiten.
+* muss prüfen, ob beim angegebenen Zeitfenster die End- nach der Startzeit liegt.
+
+Folgendes Aktivitätsdiagramm verdeutlicht dies:
+
+![Aktivitätsdiagramm Zeitfenster bearbeiten](diagrams/ad-zeitfenster-bearbeiten.jpg)
+
+##### Bemerkung bearbeiten
+Die Funktion "Bemerkung bearbeiten"
+* muss dem Administrator die Möglichkeit bieten, einem Termin eine Bemerkung hinzuzufügen.
+* muss dem Administrator die Möglichkeit bieten, die Bemerkung eines Termins, sofern vorhanden, zu bearbeiten.
+
+Folgendes Aktivitätsdiagramm verdeutlicht dies:
+
+![Aktivitätsdiagramm Zeitfenster bearbeiten](diagrams/ad-bemerkung-bearbeiten.jpg)
+
+##### Raum und Endzeit einer Buchung festlegen
+Die Funktion "Raum und Endzeit einer Buchung festlegen"
+* muss dem Administrator die Möglichkeit bieten, einem gebuchten Prüfungstermin den Prüfungsraum und die Endzeit der Prüfung zuzuordnen.
+* muss sicherstellen, dass die Endzeit nach der Startzeit liegt.
+
+Folgendes Aktivitätsdiagramm verdeutlicht dies:
+
+![Aktivitätsdiagramm Raum und Endzeit festlegen](diagrams/ad-raum-endzeit-festlegen.jpg)
+
+##### Termine exportieren
+Die Funktion "Termine exportieren"
+* sollte dem Administrator die Möglichkeit bieten, eine Übersicht der gebuchten Termine als PDF zu exportieren.
+* sollte dem Administrator die Möglichkeit bieten, eine Übersicht der gebuchten Termine als Kalenderdaten zu exportieren.
+
+Folgendes Aktivitätsdiagramm verdeutlicht dies:
+
+![Aktivitätsdiagramm Termine exportieren](diagrams/ad-raum-endzeit-festlegen.jpg)
 
 #### Gruppen verwalten
-![AWF-Diagramm Gruppen verwalten](diagrams/awf-gruppen.jpg)
-* Das System bla
+Folgendes Anwendungsfalldiagramm gibt einen Überblick über die Anwendungsfälle der essentiellen Gruppe "Gruppen verwalten":
 
-#### Prüfungstermine anzeigen und buchen
-![AWF-Diagramm Termine anzeigen und buchen Studenten](diagrams/awf-termine-studenten.jpg)
+![AWF-Diagramm Gruppen verwalten](diagrams/awf-gruppen-verwalten.jpg)
+
+##### Gruppe anlegen
+Die Funktion "Gruppe anlegen"
+* muss dem Administrator die Möglichkeit bieten, eine Gruppe anzulegen.
+
+Folgendes Aktivitätsdiagramm verdeutlicht dies:
+
+![Aktivitätsdiagramm Gruppe anlegen](diagrams/ad-gruppe-anlegen.jpg)
+
+##### Gruppe löschen
+Die Funktion "Gruppe löschen"
+* muss dem Administrator die Möglichkeit bieten, eine Gruppe zu löschen.
+
+Folgendes Aktivitätsdiagramm verdeutlicht dies:
+
+![Aktivitätsdiagramm Gruppe löschen](diagrams/ad-gruppe-loeschen.jpg)
+
+##### Gruppen anzeigen
+Die Funktion "Gruppen anzeigen"
+* muss dem Administrator die Möglichkeit bieten, alle Gruppen anzuzeigen.
+* muss die Gruppen, die noch nicht gebucht haben, visuell hervorheben.
+
+Folgendes Aktivitätsdiagramm verdeutlicht dies:
+
+![Aktivitätsdiagramm Gruppen anzeigen](diagrams/ad-gruppen-anzeigen.jpg)
+
+
+#### Termine anzeigen
+Die Funktion "Termine anzeigen"
+* muss dem Administrator und den Studenten die Möglichkeit bieten, die Termine anzuzeigen.
+
+![AWF-Diagramm Termine anzeigen](diagrams/ad-termine-anzeigen.jpg)
+
+#### Termine buchen und reservieren
+Folgendes Anwendungsfalldiagramm gibt einen Überblick über die Anwendungsfälle der essentiellen Gruppe "Termine buchen und reservieren":
+
+![AWF-Diagramm Termine verwalten Lehrende](diagrams/awf-termine-reservieren-und-buchen.jpg)
+
+##### Termin reservieren
+Die Funktion "Termin reservieren"
+* muss einem Studenten die Möglichkeit bieten, einen Termin zu reservieren.
+* muss sicherstellen, dass eine Gruppe nur eine Reservierung tätigen kann.
+* muss sicherstellen, dass nur freie Termine reserviert werden können.
+* muss sicherstellen, dass eine Gruppe, die bereits gebucht hat, keinen Termin mehr reservieren kann.
+
+Folgendes Aktivitätsdiagramm verdeutlicht dies:
+
+![Aktivitätsdiagramm Termin reservieren](diagrams/ad-termin-reservieren.jpg)
+
+##### Reservierung stornieren
+Die Funktion "Reservierung stornieren"
+* muss einem Studenten die Möglichkeit bieten, die Reservierung eines Termins zu stornieren.
+
+Folgendes Aktivitätsdiagramm verdeutlicht dies:
+
+![Aktivitätsdiagramm Reservierung stornieren](diagrams/ad-reservierung-stornieren.jpg)
+
+##### Termin buchen
+Die Funktion "Termin buchen"
+* muss einem Studenten die Möglichkeit bieten, einen Prüfungstermin zu buchen.
+* muss sicherstellen, dass eine Gruppe nur einen Termin buchen kann.
+* muss beim Buchen eine Reservierung der buchenden Gruppe, sofern vorhanden, entfernen.
+* muss sicherstellen, dass nur freie Termine gebucht werden können.
+* muss prüfen, ob die gewählte Startzeit im Zeitfenster des Termins liegt.
+
+Folgendes Aktivitätsdiagramm verdeutlicht dies:
+
+![Aktivitätsdiagramm Termin buchen](diagrams/ad-termin-buchen.jpg)
+
+#### Zustandsdiagramm eines Termins
+Folgendes Zustandsdiagramm gibt einen Überblick über die Zustände eines Termins und die möglichen Übergänge zwischen diesen Zuständen:
+
+![Zustandsdiagramm Termine](diagrams/zd-termine.jpg)
 
 
 ### Qualitätsanforderungen
 * Das System soll einen Kalender anbieten, in dem die Startzeiten der Doppelstundenraster bereits vorhanden sind.
 * Die verschiedenen Zustände eines Termins sollen visuell voneinander unterscheidbar sein.
+* In der Gruppenübersicht sollen Gruppen, die noch nicht gebucht haben, visuell hervorgehoben werden.
 
 ### Rahmenbedingungen
 
 #### technisch/technologische Rahmenbedingungen
-* Das System wird als Web-Anwendung realisiert.
-* Das System wird auf http://www2.htw-dresden.de/~hauptmann installiert und muss mit den dort gegebenen technischen Möglichkeiten auskommen.
+* Das System wird mit Java als Desktop-App implementiert.
+* Es wird ferner eine MySQL-Datenbank auf einem Hochschulserver verwendet. Der Auftraggeber beantragt diese bei der HTW.
 * Die technischen Abhängigkeiten sollen so gering wie möglich sein.
 
 #### organisatorische Rahmenbedingungen
@@ -82,7 +268,18 @@ Termin verbindlich buchen | Buchungswunsch |
 * Es findet höchstens eine Prüfung pro Tag statt.
 * Die gebuchte Startzeit ist verbindlich. Die Gruppe muss beim Buchen selbst dafür sorgen, dass die Startzeit früh genug innerhalb des Zeitrahmens gewählt wird, sodass die komplette Prüfung im Zeitrahmen bleibt.
 * Die Endzeit einer Prüfung wird von der Prüfenden eingetragen.
-* Das System ist nicht für die Authentifizierung der Studierenden und Lehrenden zuständig. Diese wird von der Lehrenden über die Webserver-Einstellungen realisiert.
+* Das System ist nicht für die Authentifizierung der Studierenden und Lehrenden zuständig.
 
 #### rechtliche Rahmenbedingungen
 * Um dem Datenschutz gerecht zu werden, werden Gruppen nur über den Gruppennamen identifiziert.
+
+## Glossar
+
+Begriff | Bedeutung
+--------|----------
+Termin | Tag, Start-und Endzeit eines Zeitfensters, in dem eine Prüfung stattfinden kann. Innerhalb des Termins kann eine Reservierung bzw. Buchung gemacht werden
+deaktivierter Termin | Ein Tag, an dem keine Prüfung stattfinden kann.
+Reservierung | nicht verbindliche Kennzeichnung einer Gruppe, dass sie einen Termin buchen möchte
+Buchung | verbindliche Entscheidung einer Gruppe, einen bestimmten Termin als Prüfungstermin in Anspruch zu nehmen
+Student | Studierende(r) des Moduls "Software-Engineering II", der/die in seiner/ihrer Gruppe in der Prüfungszeit geprüft werden muss
+Administrator | Die Lehrende bzw. Prüfende des Moduls "Software-Engineering II", sowie der Praktikumsbetreuer, der ebenfalls bei einer Prüfung mitwirkt
