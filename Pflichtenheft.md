@@ -3,7 +3,7 @@ Belegarbeit Software-Engineering II
 
 Sommersemester 2018
 
-Thema: Entwicklung eines SW‐Systems zur Unterstützung der Planung von Präsentationen im Kontext des Moduls SE II
+Thema: Entwicklung eines SW‐Systems zur Unterstützung der Planung von Präsentationen im Kontext des Moduls SE II
 
 Bearbeitet von:
 * Denis Keiling
@@ -40,7 +40,7 @@ TODO
 #### Überblick
 Die folgende Tabelle gibt einen Überblick über die essentiellen Gruppen und essentiellen Funktionen, sowie deren Auslöser und Reaktionen:
 
-Anwendungsfall | Auslöser | Reaktion
+Anwendungsfall | Auslöser/Eingabe | Reaktion/Ausgabe
 ---------------|----------|---------
 **Prüfungstermine verwalten** | |
 Termine und Gruppen generieren | Startdatum + Anzahl Gruppen | Termine + Gruppen
