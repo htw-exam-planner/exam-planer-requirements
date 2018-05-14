@@ -46,9 +46,9 @@ Anwendungsfall | Auslöser | Reaktion
 Termine und Gruppen generieren | Startdatum + Anzahl Gruppen | Termine + Gruppen
 Termin als frei markieren | Termin | Termin (neu)
 Termin deaktivieren | Termin | Termin (neu)
-Zeitfenster bearbeiten | Termin + Zeitfenster | Termin (neu)
+Zeitfenster bearbeiten | Termin + Zeitfenster | Termin (neu) bzw. Warnhinweis
 Bemerkung bearbeiten | Termin + Bemerkung | Termin (neu)
-Raum und Endzeit festlegen | Termin + Raum + Endzeit | Termin (neu)
+Raum und Endzeit festlegen | Termin + Raum + Endzeit | Termin (neu) bzw. Warnhinweis
 Termine exportieren | | Termine
 **Termine anzeigen** | |
 Termine anzeigen | | Termine
@@ -57,9 +57,10 @@ Gruppe anlegen | Gruppenname | Gruppe
 Gruppe löschen | Gruppe |
 Gruppen anzeigen | | Gruppen
 **Prüfungstermine anzeigen und buchen** | |
-Termin reservieren | Gruppe + Termin |
-Reservierten Termin stornieren | Termin |
-Termin buchen | Gruppe + Termin + Startzeit |
+Als Gruppe anmelden | Gruppe |
+Termin reservieren | Gruppe + Termin | ggf. Warnhinweis
+Reservierten Termin stornieren | Termin | ggf. Warnhinweis
+Termin buchen | Gruppe + Termin + Startzeit | ggf. Warnhinweis
 
 Die essentiellen Gruppen sind ferner in folgendem Anwendungsfalldiagramm dargestellt. Abstrakte Anwendungsfälle sind dabei kursiv geschrieben.
 
@@ -106,12 +107,6 @@ Folgendes Anwendungsfalldiagramm gibt einen Überblick über die Anwendungsfäll
 ##### Termine und Gruppen generieren
 Die Funktion "Termine und Gruppen generieren"
 * muss dem Administrator die Möglichkeit bieten, die 15 Termine eines Prüfungszeitraums sowie die Gruppen dieses Zeitraums anzulegen.
-
-Termine = {
-  Tag
-  \+ Zeitfenster
-  \+  
-}
 
 Folgendes Aktivitätsdiagramm verdeutlicht dies:
 
@@ -169,7 +164,7 @@ Die Funktion "Termine exportieren"
 
 Folgendes Aktivitätsdiagramm verdeutlicht dies:
 
-![Aktivitätsdiagramm Termine exportieren](diagrams/ad-raum-endzeit-festlegen.jpg)
+![Aktivitätsdiagramm Termine exportieren](diagrams/ad-termine-exportieren.jpg)
 
 #### Gruppen verwalten
 Folgendes Anwendungsfalldiagramm gibt einen Überblick über die Anwendungsfälle der essentiellen Gruppe "Gruppen verwalten":
@@ -211,7 +206,13 @@ Die Funktion "Termine anzeigen"
 #### Termine buchen und reservieren
 Folgendes Anwendungsfalldiagramm gibt einen Überblick über die Anwendungsfälle der essentiellen Gruppe "Termine buchen und reservieren":
 
-![AWF-Diagramm Termine verwalten Lehrende](diagrams/awf-termine-reservieren-und-buchen.jpg)
+![AWF-Diagramm Termine buchen und reservieren](diagrams/awf-termine-reservieren-und-buchen.jpg)
+
+##### Als Gruppe anmelden
+Die Funktion "Als Gruppe anmelden"
+* muss einem Studenten ermöglichen, sich unter Angabe seiner Gruppe am System anzumelden.
+
+![Aktivitätsdiagramm Als Gruppe anmelden](diagrams/ad-gruppe-anmelden.jpg)
 
 ##### Termin reservieren
 Die Funktion "Termin reservieren"
@@ -245,13 +246,12 @@ Folgendes Aktivitätsdiagramm verdeutlicht dies:
 ![Aktivitätsdiagramm Termin buchen](diagrams/ad-termin-buchen.jpg)
 
 #### Zustandsdiagramm eines Termins
-Folgendes Zustandsdiagramm gibt einen Überblick über die Zustände eines Termins und die möglichen Übergänge zwischen diesen Zuständen:
+Folgendes Zustandsdiagramm gibt einen Überblick über die Zustände eines Termins und die möglichen Übergänge zwischen diesen Zuständen. Eine Erklärung der Bedeutung der Zustände findet sich im Glossar.
 
 ![Zustandsdiagramm Termine](diagrams/zd-termine.jpg)
 
 
 ### Qualitätsanforderungen
-* Das System soll einen Kalender anbieten, in dem die Startzeiten der Doppelstundenraster bereits vorhanden sind.
 * Die verschiedenen Zustände eines Termins sollen visuell voneinander unterscheidbar sein.
 * In der Gruppenübersicht sollen Gruppen, die noch nicht gebucht haben, visuell hervorgehoben werden.
 
@@ -279,6 +279,7 @@ Begriff | Bedeutung
 --------|----------
 Termin | Tag, Start-und Endzeit eines Zeitfensters, in dem eine Prüfung stattfinden kann. Innerhalb des Termins kann eine Reservierung bzw. Buchung gemacht werden
 deaktivierter Termin | Ein Tag, an dem keine Prüfung stattfinden kann.
+freier Termin | Ein Termin, an dem eine Prüfung stattfinden kann und der noch nicht reserviert oder gebucht ist.
 Reservierung | nicht verbindliche Kennzeichnung einer Gruppe, dass sie einen Termin buchen möchte
 Buchung | verbindliche Entscheidung einer Gruppe, einen bestimmten Termin als Prüfungstermin in Anspruch zu nehmen
 Student | Studierende(r) des Moduls "Software-Engineering II", der/die in seiner/ihrer Gruppe in der Prüfungszeit geprüft werden muss
