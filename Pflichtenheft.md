@@ -44,20 +44,21 @@ Anwendungsfall | Auslöser/Eingabe | Reaktion/Ausgabe
 ---------------|----------|---------
 **Prüfungstermine verwalten** | |
 Termine und Gruppen generieren | Startdatum + Anzahl Gruppen | Termine + Gruppen
-Termin als frei markieren | Termin | Termin (neu)
-Termin deaktivieren | Termin | Termin (neu)
-Zeitfenster bearbeiten | Termin + Zeitfenster | Termin (neu) bzw. Warnhinweis
-Bemerkung bearbeiten | Termin + Bemerkung | Termin (neu)
-Raum und Endzeit festlegen | Termin + Raum + Endzeit | Termin (neu) bzw. Warnhinweis
+Termin bearbeiten | Termin | Termine bzw. Warnhinweis
+Termin als frei markieren | Termin | Termine
+Termin deaktivieren | Termin | Termine
+Zeitfenster bearbeiten | Termin | Termine bzw. Warnhinweis
+Bemerkung bearbeiten | Termin | Termine
+Raum und Endzeit festlegen | Termin | Termine bzw. Warnhinweis
 Termine exportieren | | Termine
 **Termine anzeigen** | |
 Termine anzeigen | | Termine
 **Gruppen verwalten** | |
 Gruppe anlegen | Gruppenname | Gruppe
-Gruppe löschen | Gruppe |
+Gruppe löschen | Gruppe | Gruppen (neu)
 Gruppen anzeigen | | Gruppen
 **Prüfungstermine anzeigen und buchen** | |
-Als Gruppe anmelden | Gruppe |
+Als Gruppe anmelden | Gruppe | Termine
 Termin reservieren | Gruppe + Termin | ggf. Warnhinweis
 Reservierten Termin stornieren | Termin | ggf. Warnhinweis
 Termin buchen | Gruppe + Termin + Startzeit | ggf. Warnhinweis
@@ -111,6 +112,19 @@ Die Funktion "Termine und Gruppen generieren"
 Folgendes Aktivitätsdiagramm verdeutlicht dies:
 
 ![Aktivitätsdiagramm Termine und Gruppen generieren](diagrams/ad-termine-gruppen-generieren.jpg)
+
+##### Termin bearbeiten
+Die Funktion "Termin bearbeiten"
+* muss dem Administrator die Möglichkeit bieten, eine der folgenden Aktionen durchzuführen:
+ * Termin als frei markieren
+ * Termin deaktivieren
+ * Zeitfenster bearbeiten
+ * Bemerkung bearbeiten
+ * Raum und Endzeit festlegen
+
+Folgendes Aktivitätsdiagramm verdeutlicht dies. Die möglichen Aktionen sind in ihren jeweiligen Aktivitätsdiagrammen beschrieben:
+
+![Aktivitätsdiagramm Termin frei markieren](diagrams/ad-termin-bearbeiten.jpg)
 
 ##### Termin als frei markieren
 Die Funktion "Termin als frei markieren"
