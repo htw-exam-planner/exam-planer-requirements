@@ -31,7 +31,48 @@ Der Kontext des Systems wird durch folgendes Diagramm beschrieben:
 ![Kontexdiagramm](diagrams/awf-kontext.jpg)
 
 ## Benutzerschnittstelle
-TODO
+### Startbildschirm - Rollenauswahl
+Auf dem Startbildschirm kann der Benutzer auswählen, ob die Anwendung im Administrator- oder im Studentenmodus genutzt werden soll.
+![Rollenauswahl](ui-prototypes/exports/Role%20selection.png)
+ 
+### Studentenansicht
+#### Gruppenauswahl
+In der Gruppenauswahl kann der Student die Gruppe auswählen, für die er die Buchung durchführen möchte.
+![Gruppenauswahl](ui-prototypes/exports/Group%20selection.png)
+
+#### Terminansicht
+In der Terminansicht kann sich der Student eine Übersicht über die verfügbaren Termine veschaffen und Buchungen/Reservierungen verwalten.
+![Terminansicht](ui-prototypes/exports/Date%20management.png)
+
+##### Buchung durchführen
+Nach dem Drücken des "Buchen" Knopfes muss der Student die Startzeit für die Prüfung eingeben.
+![Buchung durchführen](ui-prototypes/exports/Date%20management%20\(Book%20Button%20pressed\).png)
+
+### Administratoransicht
+#### Gruppen und Termine anlegen
+Mithilfe des Formulars kann der Administrator die initialen Gruppen und Termine anlegen.
+![Gruppen und Termine anlegen](ui-prototypes/exports/Setup.png)
+
+#### Terminansicht
+In der Terminansicht kann sich der Administrator eine Übersicht über die verfügbaren Termine veschaffen, Termine editieren und Buchungen/Reservierungen verwalten.
+![Terminansicht](ui-prototypes/exports/Date%20management%20Admin.png)
+
+##### Termin bearbeiten
+Durch die Schaltfläche "Bearbeiten", kann der Administrator den Zeitraum und den Kommentar des Termins bearbeiten und den Termin deaktivieren.
+![Termin bearbeiten](ui-prototypes/exports/Date%20management%20Admin%20\(Edit%20Button%20pressed,%20no%20Booking\).png)
+
+Falls eine Buchung für den Termin besteht, kann der Administrator die Buchung stornieren oder den Zeitraum sowie Prüfungsraum der Buchung festlegen.
+![Termin bearbeiten - Buchung](ui-prototypes/exports/Date%20management%20Admin%20\(Edit%20Button%20pressed,%20Booking%20present\).png)
+
+Falls eine Reservierung für den Termin besteht, kann der Administrator die Reservierung stornieren.
+![Termin bearbeiten - Reservierung](ui-prototypes/exports/Date%20management%20Admin%20\(Edit%20Button%20pressed,%20Reservation%20present\).png)
+
+Falls der Termin deaktiviert ist, kann der Administrator den Termin wieder aktivieren.
+![Termin bearbeiten - Deaktiviert](ui-prototypes/exports/Date%20management%20Admin%20\(Edit%20Button%20pressed,%20Deactivated\).png)
+
+#### Gruppenansicht
+In der Gruppenansicht kann sich der Administrator einen Überblick über den Zustand der Gruppen verschaffen, sowie Gruppen mithilfe der entsprechenden Schaltflächen anlegen und löschen.
+![Gruppenansicht](ui-prototypes/exports/Group%20management.png)
 
 ## Anforderungen
 
