@@ -37,7 +37,7 @@ Auf dem Startbildschirm kann der Benutzer auswählen, ob die Anwendung im Admini
  
 ### Studentenansicht
 #### Gruppenauswahl
-In der Gruppenauswahl kann der Student die Gruppe auswählen für die er die Buchung durchführen möchte.
+In der Gruppenauswahl kann der Student die Gruppe auswählen, für die er die Buchung durchführen möchte.
 ![Gruppenauswahl](ui-prototypes/exports/Group%20selection.png)
 
 #### Terminansicht
@@ -45,7 +45,7 @@ In der Terminansicht kann sich der Student eine Übersicht über die verfügbare
 ![Terminansicht](ui-prototypes/exports/Date%20management.png)
 
 ##### Buchung durchführen
-Nach dem Drücken des "Buchen" Knopfes muss der Student die Startzeit für die Proüfung eingeben.
+Nach dem Drücken des "Buchen" Knopfes muss der Student die Startzeit für die Prüfung eingeben.
 ![Buchung durchführen](ui-prototypes/exports/Date%20management%20\(Book%20Button%20pressed\).png)
 
 ### Administratoransicht
@@ -65,7 +65,7 @@ Falls eine Buchung für den Termin besteht, kann der Administrator die Buchung s
 ![Termin bearbeiten - Buchung](ui-prototypes/exports/Date%20management%20Admin%20\(Edit%20Button%20pressed,%20Booking%20present\).png)
 
 Falls eine Reservierung für den Termin besteht, kann der Administrator die Reservierung stornieren.
-![Termin bearbeiten - Reservierung](ui-prototypes/exports/Date%20management%20Admin%20\(Edit%20Button%20pressed,%Reservation%20present\).png)
+![Termin bearbeiten - Reservierung](ui-prototypes/exports/Date%20management%20Admin%20\(Edit%20Button%20pressed,%20Reservation%20present\).png)
 
 Falls der Termin deaktiviert ist, kann der Administrator den Termin wieder aktivieren.
 ![Termin bearbeiten - Deaktiviert](ui-prototypes/exports/Date%20management%20Admin%20\(Edit%20Button%20pressed,%20Deactivated\).png)
