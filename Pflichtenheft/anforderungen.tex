@@ -1,0 +1,418 @@
+\section{Anforderungen}
+
+\subsection{Funktionale Anforderungen}
+
+\subsubsection{Überblick}
+Die folgende Tabelle gibt einen Überblick über die essentiellen Gruppen
+und essentiellen Funktionen, sowie deren Auslöser und Reaktionen:
+
+\begin{tabular}{ | l | l | l | }
+  \hline
+  Anwendungsfall & Auslöser/Eingabe & Reaktion/Ausgabe \\
+  \hline
+  \textbf{Prüfungstermine verwalten} & & \\
+  Termine und Gruppen generieren & Startdatum + Anzahl Gruppen & Termine + Gruppen \\
+  Termin bearbeiten & Termin & Termine bzw. Warnhinweis \\
+  Termin als frei markieren & Termin & Termine \\
+  Termin deaktivieren & Termin & Termine \\
+  Zeitfenster bearbeiten & Termin & Termine bzw. Warnhinweis \\
+  Bemerkung bearbeiten & Termin & Termine \\
+  Raum und Endzeit festlegen & Termin & Termine bzw. Warnhinweis \\
+  Termine exportieren &  & Termine \\
+  \textbf{Termine anzeigen} &  &  \\
+  Termine anzeigen &  & Termine \\
+  \textbf{Gruppen verwalten} &  &  \\
+  Gruppe anlegen & Gruppenname & Gruppe \\
+  Gruppe löschen & Gruppe & Gruppen (neu) \\
+  Gruppen anzeigen &  & Gruppen \\
+  \textbf{Prüfungstermine anzeigen und buchen} &  &  \\
+  Als Gruppe anmelden & Gruppe & Termine \\
+  Termin reservieren & Gruppe + Termin & ggf. Warnhinweis \\
+  Reservierten Termin stornieren & Termin & ggf. Warnhinweis \\
+  Termin buchen & Gruppe + Termin + Startzeit & ggf. Warnhinweis \\
+  \hline
+\end{tabular}
+
+Die essentiellen Gruppen sind ferner im Anwendungsfalldiagramm (Abbildung \ref{fig:awf-ueberblick}) dargestellt. Abstrakte Anwendungsfälle sind dabei kursiv geschrieben.
+
+\begin{figure}
+  \centering
+  \includegraphics{diagrams/awf-ueberblick.jpg}
+  \caption{AWF-Diagramm Überblick}
+  \label{fig:awf-ueberblick}
+\end{figure}
+
+\paragraph{Struktur der Auslöser und Reaktionen}
+
+Termin = Datum + Zeitfenster + Terminzustand + Bemerkung + (
+Reservierung \textbar{} Buchung )
+
+Termine = \{Termin\}
+
+Zeitfenster = Startzeit + Endzeit
+
+Terminzustand = frei \textbar{} deaktiviert \textbar{} reserviert \textbar{} gebucht
+
+Reservierung = Gruppe
+
+Buchung = Gruppe + Startzeit + (Endzeit) + (Raum)
+
+Gruppe = Gruppenname + Buchungsstatus
+
+Buchungsstatus = gebucht \textbar{} noch nicht gebucht
+
+Gruppen = \{Gruppe\}
+
+Die anderen Auslöser und Reaktionen sind atomare Werte.
+
+Es folgen nun die Beschreibungen aller Anwendungsfälle.
+
+\subsubsection{Termine verwalten}
+Das Anwendungsfalldiagramm in Abbildung \ref{fig:awf-termine-verwalten} gibt einen Überblick über die Anwendungsfälle der essentiellen Gruppe ``Termine verwalten'':
+
+\begin{figure}
+  \centering
+  \includegraphics{diagrams/awf-termine-verwalten.jpg}
+  \caption{AWF-Diagramm Termine verwalten Lehrende}
+  \label{fig:awf-termine-verwalten}
+\end{figure}
+
+\paragraph{Termine und Gruppen generieren}
+
+Die Funktion ``Termine und Gruppen generieren''
+\begin{itemize}
+  \item muss dem Administrator die Möglichkeit bieten, die 15 Termine eines Prüfungszeitraums sowie die Gruppen dieses Zeitraums anzulegen.
+\end{itemize}
+
+Abbildung \ref{fig:ad-termine-gruppen-generieren} verdeutlicht dies in einem Aktivitätsdiagramm.
+
+\begin{figure}
+  \centering
+  \includegraphics{diagrams/ad-termine-gruppen-generieren.jpg}
+  \caption{Aktivitätsdiagramm Termine und Gruppen generieren}
+  \label{fig:ad-termine-gruppen-generieren}
+\end{figure}
+
+\paragraph{Termin bearbeiten}
+
+Die Funktion ``Termin bearbeiten''
+\begin{itemize}
+  \item muss dem Administrator die Möglichkeit bieten, eine der folgenden Aktionen durchzuführen:
+  \item Termin als frei markieren
+  \item Termin deaktivieren
+  \item Zeitfenster bearbeiten
+  \item Bemerkung bearbeiten
+  \item Raum und Endzeit festlegen
+\end{itemize}
+
+Das Aktivitätsdiagramm in Abbildung \ref{fig:ad-termin-bearbeiten} verdeutlicht dies. Die möglichen Aktionen
+sind in ihren jeweiligen Aktivitätsdiagrammen beschrieben.
+
+\begin{figure}
+  \centering
+  \includegraphics{diagrams/ad-termin-bearbeiten.jpg}
+  \caption{Aktivitätsdiagramm Termin bearbeiten}
+  \label{fig:ad-termin-bearbeiten}
+\end{figure}
+
+\paragraph{Termin als frei
+markieren}
+
+Die Funktion ``Termin als frei markieren''
+\begin{itemize}
+  \item muss dem Administrator die Möglichkeit bieten, einen Termin als frei zu markieren.
+  \item muss beim frei markieren eine ggf. vorhandene Reservierung oder Buchung löschen.
+\end{itemize}
+
+Abbildung \ref{fig:ad-termin-frei-markieren} verdeutlicht dies in einem Aktivitätsdiagramm.
+
+\begin{figure}
+  \centering
+  \includegraphics{diagrams/ad-termin-frei-markieren.jpg}
+  \caption{Aktivitätsdiagramm Termin frei markieren}
+  \label{fig:ad-termin-frei-markieren}
+\end{figure}
+
+\paragraph{Termin deaktivieren}
+
+Die Funktion ``Termin deaktivieren''
+\begin{itemize}
+  \item muss dem Administrator die Möglichkeit bieten, einen Termin zu deaktivieren.
+  \item muss beim Deaktivieren eine ggf. vorhandene Reservierung oder Buchung löschen
+\end{itemize}
+
+Abbildung \ref{fig:ad-termin-deaktivieren} verdeutlicht dies in einem Aktivitätsdiagramm.
+
+\begin{figure}
+  \centering
+  \includegraphics{diagrams/ad-termin-deaktivieren.jpg}
+  \caption{Aktivitätsdiagramm Termin deaktivieren}
+\label{fig:ad-termin-deaktivieren}
+\end{figure}
+
+\paragraph{Zeitfenster bearbeiten}
+
+Die Funktion ``Zeitfenster bearbeiten''
+\begin{itemize}
+  \item muss dem Administrator die Möglichkeit bieten, das Zeitfenster eines Termins zu bearbeiten.
+  \item muss prüfen, ob beim angegebenen Zeitfenster die End- nach der Startzeit liegt.
+\end{itemize}
+
+Abbildung \ref{fig:ad-zeitfenster-bearbeiten} verdeutlicht dies in einem Aktivitätsdiagramm.
+
+\begin{figure}
+  \centering
+  \includegraphics{diagrams/ad-zeitfenster-bearbeiten.jpg}
+  \caption{Aktivitätsdiagramm Zeitfenster bearbeiten}
+\label{fig:ad-zeitfenster-bearbeiten}
+\end{figure}
+
+\paragraph{Bemerkung bearbeiten}
+
+Die Funktion ``Bemerkung bearbeiten''
+\begin{itemize}
+  \item muss dem Administrator die Möglichkeit bieten, einem Termin eine Bemerkung hinzuzufügen.
+  \item muss dem Administrator die Möglichkeit bieten, die Bemerkung eines Termins, sofern vorhanden, zu bearbeiten.
+\end{itemize}
+
+Abbildung \ref{fig:ad-bemerkung-bearbeiten} verdeutlicht dies in einem Aktivitätsdiagramm.
+
+\begin{figure}
+  \centering
+  \includegraphics{diagrams/ad-bemerkung-bearbeiten.jpg}
+  \caption{Aktivitätsdiagramm Zeitfenster bearbeiten}
+  \label{fig:ad-bemerkung-bearbeiten}
+\end{figure}
+
+\paragraph{Raum und Endzeit einer Buchung
+festlegen}
+Die Funktion ``Raum und Endzeit einer Buchung festlegen''
+\begin{itemize}
+  \item muss dem Administrator die Möglichkeit bieten, einem gebuchten Prüfungstermin den Prüfungsraum und die Endzeit der Prüfung zuzuordnen.
+  \item muss sicherstellen, dass die Endzeit nach der Startzeit liegt.
+\end{itemize}
+
+Abbildung \ref{fig:ad-raum-endzeit-festlegen} verdeutlicht dies in einem Aktivitätsdiagramm.
+
+\begin{figure}
+  \centering
+  \includegraphics{diagrams/ad-raum-endzeit-festlegen.jpg}
+  \caption{Aktivitätsdiagramm Raum und Endzeit festlegen}
+  \label{fig:ad-raum-endzeit-festlegen}
+\end{figure}
+
+\paragraph{Termine exportieren}
+
+Die Funktion ``Termine exportieren''
+\begin{itemize}
+  \item sollte dem Administrator die Möglichkeit bieten, eine Übersicht der gebuchten Termine als PDF zu exportieren.
+  \item sollte dem Administrator die Möglichkeit bieten, eine Übersicht der gebuchten Termine als Kalenderdaten zu exportieren.
+\end{itemize}
+
+Abbildung \ref{fig:ad-termine-exportieren} verdeutlicht dies in einem Aktivitätsdiagramm.
+
+\begin{figure}
+  \centering
+  \includegraphics{diagrams/ad-termine-exportieren.jpg}
+  \caption{Aktivitätsdiagramm Termine exportieren}
+  \label{fig:ad-termine-exportieren}
+\end{figure}
+
+\subsubsection{Gruppen verwalten}
+
+Das Anwendungsfalldiagramm in Abbildung \ref{fig:awf-gruppen-verwalten} gibt einen Überblick über die
+Anwendungsfälle der essentiellen Gruppe ``Gruppen verwalten'':
+
+\begin{figure}
+  \centering
+  \includegraphics{diagrams/awf-gruppen-verwalten.jpg}
+  \caption{AWF-Diagramm Gruppen verwalten}
+  \label{fig:awf-gruppen-verwalten}
+\end{figure}
+
+\paragraph{Gruppe anlegen}
+
+Die Funktion ``Gruppe anlegen''
+\begin{itemize}
+  \item muss dem Administrator die Möglichkeit bieten, eine Gruppe anzulegen.
+\end{itemize}
+
+Abbildung \ref{fig:ad-gruppe-anlegen} verdeutlicht dies in einem Aktivitätsdiagramm.
+
+\begin{figure}
+  \centering
+  \includegraphics{diagrams/ad-gruppe-anlegen.jpg}
+  \caption{Aktivitätsdiagramm Gruppe anlegen}
+  \label{fig:ad-gruppe-anlegen}
+\end{figure}
+
+\paragraph{Gruppe löschen}
+
+Die Funktion ``Gruppe löschen''
+\begin{itemize}
+  \item muss dem Administrator die Möglichkeit bieten, eine Gruppe zu löschen.
+\end{itemize}
+
+Abbildung \ref{fig:ad-gruppe-loeschen} verdeutlicht dies in einem Aktivitätsdiagramm.
+
+\begin{figure}
+  \centering
+  \includegraphics{diagrams/ad-gruppe-loeschen.jpg}
+  \caption{Aktivitätsdiagramm Gruppe löschen}
+  \label{fig:ad-gruppe-loeschen}
+\end{figure}
+
+\paragraph{Gruppen anzeigen}
+
+Die Funktion ``Gruppen anzeigen''
+\begin{itemize}
+  \item muss dem Administrator die Möglichkeit bieten, alle Gruppen anzuzeigen.
+  \item muss die Gruppen, die noch nicht gebucht haben, visuell hervorheben.
+\end{itemize}
+
+Abbildung \ref{fig:ad-gruppen-anzeigen} verdeutlicht dies in einem Aktivitätsdiagramm.
+
+\begin{figure}
+  \centering
+  \includegraphics{diagrams/ad-gruppen-anzeigen.jpg}
+  \caption{Aktivitätsdiagramm Gruppen anzeigen}
+  \label{fig:ad-gruppen-anzeigen}
+\end{figure}
+
+\subsubsection{Termine anzeigen}
+
+Die Funktion ``Termine anzeigen''
+\begin{itemize}
+  \item muss dem Administrator und den Studenten die Möglichkeit bieten, die Termine anzuzeigen.
+\end{itemize}
+
+Abbildung \ref{fig:ad-termine-anzeigen} verdeutlicht dies in einem Aktivitätsdiagramm.
+
+\begin{figure}
+  \centering
+  \includegraphics{diagrams/ad-termine-anzeigen.jpg}
+  \caption{AWF-Diagramm Termine anzeigen}
+  \label{fig:ad-termine-anzeigen}
+\end{figure}
+
+\subsubsection{Termine buchen und
+reservieren}
+
+Das Anwendungsfalldiagramm in Abbildung \ref{fig:awf-termine-reservieren-und-buchen} gibt einen Überblick über die Anwendungsfälle der essentiellen Gruppe ``Termine buchen und
+reservieren'':
+
+\begin{figure}
+  \centering
+  \includegraphics{diagrams/awf-termine-reservieren-und-buchen.jpg}
+  \caption{AWF-Diagramm Termine buchen und reservieren}
+  \label{fig:awf-termine-reservieren-und-buchen}
+\end{figure}
+
+\paragraph{Als Gruppe anmelden}
+
+Die Funktion ``Als Gruppe anmelden''
+\begin{itemize}
+  \item muss einem Studenten ermöglichen, sich unter Angabe seiner Gruppe am System anzumelden.
+\end{itemize}
+
+Abbildung \ref{fig:ad-gruppe-anmelden} verdeutlicht dies in einem Aktivitätsdiagramm.
+
+\begin{figure}
+  \centering
+  \includegraphics{diagrams/ad-gruppe-anmelden.jpg}
+  \caption{Aktivitätsdiagramm Als Gruppe anmelden}
+  \label{fig:ad-gruppe-anmelden}
+\end{figure}
+
+\paragraph{Termin reservieren}
+
+Die Funktion ``Termin reservieren''
+\begin{itemize}
+  \item muss einem Studenten die Möglichkeit bieten, einen Termin zu reservieren.
+  \item muss sicherstellen, dass eine Gruppe nur eine Reservierung tätigen kann.
+  \item muss sicherstellen, dass nur freie Termine reserviert werden können.
+  \item muss sicherstellen, dass eine Gruppe, die bereits gebucht hat, keinen Termin mehr reservieren kann.
+\end{itemize}
+
+Abbildung \ref{fig:ad-termin-reservieren} verdeutlicht dies in einem Aktivitätsdiagramm.
+
+\begin{figure}
+  \centering
+  \includegraphics{diagrams/ad-termin-reservieren.jpg}
+  \caption{Aktivitätsdiagramm Termin reservieren}
+  \label{fig:ad-termin-reservieren}
+\end{figure}
+
+\paragraph{Reservierung stornieren}
+
+Die Funktion ``Reservierung stornieren''
+\begin{itemize}
+  \item muss einem Studenten die Möglichkeit bieten, die Reservierung eines Termins zu stornieren.
+\end{itemize}
+
+Abbildung \ref{fig:ad-reservierung-stornieren} verdeutlicht dies in einem Aktivitätsdiagramm.
+
+\begin{figure}
+  \centering
+  \includegraphics{diagrams/ad-reservierung-stornieren.jpg}
+  \caption{Aktivitätsdiagramm Reservierung stornieren}
+  \label{fig:ad-reservierung-stornieren}
+\end{figure}
+
+\paragraph{Termin buchen}
+
+Die Funktion ``Termin buchen''
+\begin{itemize}
+  \item muss einem Studenten die Möglichkeit bieten, einen Prüfungstermin zu buchen.
+  \item muss sicherstellen, dass eine Gruppe nur einen Termin buchen kann.
+  \item muss beim Buchen eine Reservierung der buchenden Gruppe, sofern vorhanden, entfernen.
+  \item muss sicherstellen, dass nur freie Termine gebucht werden können.
+  \item muss prüfen, ob die gewählte Startzeit im Zeitfenster des Termins liegt.
+\end{itemize}
+
+Abbildung \ref{fig:ad-termin-buchen} verdeutlicht dies in einem Aktivitätsdiagramm.
+
+\begin{figure}
+  \centering
+  \includegraphics{diagrams/ad-termin-buchen.jpg}
+  \caption{Aktivitätsdiagramm Termin buchen}
+  \label{fig:ad-termin-buchen}
+\end{figure}
+
+\subsubsection{Zustandsdiagramm eines Termins}
+Das Zustandsdiagramm in Abbildung \ref{fig:zd-termine} gibt einen Überblick über die Zustände eines Termins und die möglichen Übergänge zwischen diesen Zuständen. Eine Erklärung der Bedeutung der Zustände findet sich im Glossar.
+\begin{figure}
+  \centering
+  \includegraphics{diagrams/zd-termine.jpg}
+  \caption{Zustandsdiagramm Termine}
+  \label{fig:zd-termine}
+\end{figure}
+
+\subsection{Qualitätsanforderungen}
+\begin{itemize}
+  \item Die verschiedenen Zustände eines Termins sollen visuell voneinander unterscheidbar sein.
+  \item In der Gruppenübersicht sollen Gruppen, die noch nicht gebucht haben, visuell hervorgehoben werden.
+\end{itemize}
+
+\subsection{Rahmenbedingungen}
+\subsubsection{technisch/technologische Rahmenbedingungen}
+\begin{itemize}
+  \item Das System wird mit Java als Desktop-App implementiert.
+  \item Es wird ferner eine MySQL-Datenbank auf einem Hochschulserver verwendet. Der Auftraggeber beantragt diese bei der HTW.
+  \item Die technischen Abhängigkeiten sollen so gering wie möglich sein.
+\end{itemize}
+
+\subsubsection{organisatorische Rahmenbedingungen}
+\begin{itemize}
+  \item Es wird davon ausgegangen, dass die Gruppen einander vertrauen und sich keine Gruppe als eine andere ausgibt.
+  \item Es wird davon ausgegangen, dass sich eine Gruppe intern abspricht, bevor sie einen Termin reserviert oder bucht.
+  \item Es findet höchstens eine Prüfung pro Tag statt.
+  \item Die gebuchte Startzeit ist verbindlich. Die Gruppe muss beim Buchen selbst dafür sorgen, dass die Startzeit früh genug innerhalb des Zeitrahmens gewählt wird, sodass die komplette Prüfung im Zeitrahmen bleibt.
+  \item Die Endzeit einer Prüfung wird von der Prüfenden eingetragen.
+  \item Das System ist nicht für die Authentifizierung der Studierenden und Lehrenden zuständig.
+\end{itemize}
+
+\subsubsection{rechtliche Rahmenbedingungen}
+\begin{itemize}
+  \item Um dem Datenschutz gerecht zu werden, werden Gruppen nur über den Gruppennamen identifiziert.
+\end{itemize}
