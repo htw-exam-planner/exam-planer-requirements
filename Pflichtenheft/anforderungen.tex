@@ -3,37 +3,40 @@
 \subsection{Funktionale Anforderungen}
 
 \subsubsection{Überblick}
-Die folgende Tabelle gibt einen Überblick über die essentiellen Gruppen
-und essentiellen Funktionen, sowie deren Auslöser und Reaktionen:
+Die Tabelle \ref{tab:art} gibt einen Überblick über die essentiellen Gruppen und essentiellen Funktionen, sowie deren Auslöser und Reaktionen:
 
-\begin{tabular}{ | l | l | l | }
-  \hline
-  Anwendungsfall & Auslöser/Eingabe & Reaktion/Ausgabe \\
-  \hline
-  \textbf{Prüfungstermine verwalten} & & \\
-  Termine und Gruppen generieren & Startdatum + Anzahl Gruppen & Termine + Gruppen \\
-  Termin bearbeiten & Termin & Termine bzw. Warnhinweis \\
-  Termin als frei markieren & Termin & Termine \\
-  Termin deaktivieren & Termin & Termine \\
-  Zeitfenster bearbeiten & Termin & Termine bzw. Warnhinweis \\
-  Bemerkung bearbeiten & Termin & Termine \\
-  Raum und Endzeit festlegen & Termin & Termine bzw. Warnhinweis \\
-  Termine exportieren &  & Termine \\
-  \textbf{Termine anzeigen} &  &  \\
-  Termine anzeigen &  & Termine \\
-  \textbf{Gruppen verwalten} &  &  \\
-  Gruppe anlegen & Gruppenname & Gruppe \\
-  Gruppe löschen & Gruppe & Gruppen (neu) \\
-  Gruppen anzeigen &  & Gruppen \\
-  \textbf{Prüfungstermine anzeigen und buchen} &  &  \\
-  Als Gruppe anmelden & Gruppe & Termine \\
-  Termin reservieren & Gruppe + Termin & ggf. Warnhinweis \\
-  Reservierten Termin stornieren & Termin & ggf. Warnhinweis \\
-  Termin buchen & Gruppe + Termin + Startzeit & ggf. Warnhinweis \\
-  \hline
-\end{tabular}
+\begin{table}
+  \begin{tabulary}{1.0\textwidth}{LLL}
+    \hline
+    Anwendungsfall & Auslöser/Eingabe & Reaktion/Ausgabe \\
+    \hline
+    \textbf{Prüfungstermine verwalten} & & \\
+    Termine und Gruppen generieren & Startdatum + Anzahl Gruppen & Termine + Gruppen \\
+    Termin bearbeiten & Termin & Termine bzw. Warnhinweis \\
+    Termin als frei markieren & Termin & Termine \\
+    Termin deaktivieren & Termin & Termine \\
+    Zeitfenster bearbeiten & Termin & Termine bzw. Warnhinweis \\
+    Bemerkung bearbeiten & Termin & Termine \\
+    Raum und Endzeit festlegen & Termin & Termine bzw. Warnhinweis \\
+    Termine exportieren &  & Termine \\
+    \textbf{Termine anzeigen} &  &  \\
+    Termine anzeigen &  & Termine \\
+    \textbf{Gruppen verwalten} &  &  \\
+    Gruppe anlegen & Gruppenname & Gruppe \\
+    Gruppe löschen & Gruppe & Gruppen (neu) \\
+    Gruppen anzeigen &  & Gruppen \\
+    \textbf{Prüfungstermine anzeigen und buchen} &  &  \\
+    Als Gruppe anmelden & Gruppe & Termine \\
+    Termin reservieren & Gruppe + Termin & ggf. Warnhinweis \\
+    Reservierten Termin stornieren & Termin & ggf. Warnhinweis \\
+    Termin buchen & Gruppe + Termin + Startzeit & ggf. Warnhinweis \\
+    \hline
+  \end{tabulary}
+  \caption{Auslöser-Reaktionen-Tabelle}
+  \label{tab:art}
+\end{table}
 
-Die essentiellen Gruppen sind ferner im Anwendungsfalldiagramm (Abbildung \ref{fig:awf-ueberblick}) dargestellt. Abstrakte Anwendungsfälle sind dabei kursiv geschrieben.
+Die essentiellen Gruppen sind ferner im Anwendungsfalldiagramm (Abbildung \ref{fig:awf-ueberblick}) dargestellt.
 
 \begin{figure}
   \centering
@@ -44,7 +47,7 @@ Die essentiellen Gruppen sind ferner im Anwendungsfalldiagramm (Abbildung \ref{f
 
 \paragraph{Struktur der Auslöser und Reaktionen}
 
-Termin = Datum + Zeitfenster + Terminzustand + Bemerkung + (
+Termin = Datum + Zeitfenster + Terminzustand + (Bemerkung) + (
 Reservierung \textbar{} Buchung )
 
 Termine = \{Termin\}
@@ -65,7 +68,16 @@ Gruppen = \{Gruppe\}
 
 Die anderen Auslöser und Reaktionen sind atomare Werte.
 
-Es folgen nun die Beschreibungen aller Anwendungsfälle.
+Bevor die Anwendungsfälle im einzelnen beschrieben werden, folgt eine Übersicht über die Zustände eines Termins.
+
+\subsubsection{Zustände eines Termins}
+Das Zustandsdiagramm in Abbildung \ref{fig:zd-termine} gibt einen Überblick über die Zustände eines Termins und die möglichen Übergänge zwischen diesen Zuständen. Eine Erklärung der Bedeutung der Zustände findet sich im Glossar.
+\begin{figure}
+  \centering
+  \includegraphics{diagrams/zd-termine.jpg}
+  \caption{Zustandsdiagramm Termine}
+  \label{fig:zd-termine}
+\end{figure}
 
 \subsubsection{Termine verwalten}
 Das Anwendungsfalldiagramm in Abbildung \ref{fig:awf-termine-verwalten} gibt einen Überblick über die Anwendungsfälle der essentiellen Gruppe ``Termine verwalten'':
@@ -115,8 +127,7 @@ sind in ihren jeweiligen Aktivitätsdiagrammen beschrieben.
   \label{fig:ad-termin-bearbeiten}
 \end{figure}
 
-\paragraph{Termin als frei
-markieren}
+\paragraph{Termin als frei markieren}
 
 Die Funktion ``Termin als frei markieren''
 \begin{itemize}
@@ -184,8 +195,7 @@ Abbildung \ref{fig:ad-bemerkung-bearbeiten} verdeutlicht dies in einem Aktivitä
   \label{fig:ad-bemerkung-bearbeiten}
 \end{figure}
 
-\paragraph{Raum und Endzeit einer Buchung
-festlegen}
+\paragraph{Raum und Endzeit einer Buchung festlegen}
 Die Funktion ``Raum und Endzeit einer Buchung festlegen''
 \begin{itemize}
   \item muss dem Administrator die Möglichkeit bieten, einem gebuchten Prüfungstermin den Prüfungsraum und die Endzeit der Prüfung zuzuordnen.
@@ -295,8 +305,7 @@ Abbildung \ref{fig:ad-termine-anzeigen} verdeutlicht dies in einem Aktivitätsdi
   \label{fig:ad-termine-anzeigen}
 \end{figure}
 
-\subsubsection{Termine buchen und
-reservieren}
+\subsubsection{Termine buchen und reservieren}
 
 Das Anwendungsfalldiagramm in Abbildung \ref{fig:awf-termine-reservieren-und-buchen} gibt einen Überblick über die Anwendungsfälle der essentiellen Gruppe ``Termine buchen und
 reservieren'':
@@ -377,15 +386,6 @@ Abbildung \ref{fig:ad-termin-buchen} verdeutlicht dies in einem Aktivitätsdiagr
   \includegraphics{diagrams/ad-termin-buchen.jpg}
   \caption{Aktivitätsdiagramm Termin buchen}
   \label{fig:ad-termin-buchen}
-\end{figure}
-
-\subsubsection{Zustandsdiagramm eines Termins}
-Das Zustandsdiagramm in Abbildung \ref{fig:zd-termine} gibt einen Überblick über die Zustände eines Termins und die möglichen Übergänge zwischen diesen Zuständen. Eine Erklärung der Bedeutung der Zustände findet sich im Glossar.
-\begin{figure}
-  \centering
-  \includegraphics{diagrams/zd-termine.jpg}
-  \caption{Zustandsdiagramm Termine}
-  \label{fig:zd-termine}
 \end{figure}
 
 \subsection{Qualitätsanforderungen}

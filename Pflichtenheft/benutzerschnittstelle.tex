@@ -1,112 +1,102 @@
 \section{Benutzerschnittstelle}
+Die Benutzerschnittstelle wird über eine Java-Anwendung realisiert. Es folgen nun die Beschreibungen sowie Prototypen einiger Ansichten.
 \subsection{Startbildschirm - Rollenauswahl}
-Auf dem Startbildschirm kann der Benutzer auswählen, ob die Anwendung im
-Administrator- oder im Studentenmodus genutzt werden soll.
+Auf dem Startbildschirm kann der Benutzer auswählen, ob die Anwendung im Administrator- oder im Studentenmodus genutzt werden soll (siehe Abbildung \ref{fig:role-selection}).
 \begin{figure}
   \centering
-  \includegraphics{ui-prototypes/exports/Role selection.png}
-  \caption{Rollenauswahl}
+  \includegraphics{ui-prototypes/exports/Role-selection.png}
+  \caption{Oberflächenprototyp Rollenauswahl}
   \label{fig:role-selection}
 \end{figure}
 
 \subsection{Studentenansicht}
 
 \paragraph{Gruppenauswahl}
-In der Gruppenauswahl kann der Student die Gruppe auswählen, für die er
-die Buchung durchführen möchte.
+In der Gruppenauswahl (Abbildung \ref{fig:group-selection}) kann der Student die Gruppe auswählen, für die er die Buchung durchführen möchte.
 \begin{figure}
   \centering
-  \includegraphics{ui-prototypes/exports/Group selection.png}
-  \caption{Gruppenauswahl}
+  \includegraphics{ui-prototypes/exports/Group-selection.png}
+  \caption{Oberflächenprototyp Gruppenauswahl}
   \label{fig:group-selection}
 \end{figure}
 
 \paragraph{Terminansicht}
-In der Terminansicht kann sich der Student eine Übersicht über die
+In der Terminansicht (Abbildung \ref{fig:date-management}) kann sich der Student eine Übersicht über die
 verfügbaren Termine veschaffen und Buchungen/Reservierungen verwalten.
 \begin{figure}
   \centering
-  \includegraphics{ui-prototypes/exports/Date management.png}
-  \caption{Terminansicht}
+  \includegraphics{ui-prototypes/exports/Date-management.png}
+  \caption{Oberflächenprototyp Terminansicht}
   \label{fig:date-management}
 \end{figure}
 
 \subparagraph{Buchung durchführen}
-Nach dem Drücken des ``Buchen'' Knopfes muss der Student die Startzeit
-für die Prüfung eingeben.
+Nach dem Drücken des ``Buchen'' Knopfes muss der Student die Startzeit für die Prüfung eingeben (Abbildung \ref{fig:date-management-book-button-pressed}).
 \begin{figure}
   \centering
-  \includegraphics{ui-prototypes/exports/Date management (Book Button pressed).png}
-  \caption{Termin durchführen}
+  \includegraphics{ui-prototypes/exports/Date-management_Book-Button-pressed.png}
+  \caption{Oberflächenprototyp Termin durchführen}
   \label{fig:date-management-book-button-pressed}
 \end{figure}
 
 \subsection{Administratoransicht}
 
 \paragraph{Gruppen und Termine anlegen}
-Mithilfe des Formulars kann der Administrator die initialen Gruppen und
-Termine anlegen.
+Mithilfe des Formulars (Abbildung \ref{fig:setup}) kann der Administrator die initialen Gruppen und Termine anlegen.
 \begin{figure}
   \centering
   \includegraphics{ui-prototypes/exports/Setup.png}
-  \caption{Gruppen und Termine anlegen}
+  \caption{Oberflächenprototyp Gruppen und Termine anlegen}
   \label{fig:setup}
 \end{figure}
 
 \paragraph{Terminansicht}
-In der Terminansicht kann sich der Administrator eine Übersicht über die
-verfügbaren Termine veschaffen, Termine editieren und
-Buchungen/Reservierungen verwalten.
+In der Terminansicht (Abbildung \ref{fig:date-management-admin}) kann sich der Administrator eine Übersicht über die verfügbaren Termine veschaffen, Termine bearbeiten und Buchungen/Reservierungen verwalten.
 \begin{figure}
   \centering
-  \includegraphics{ui-prototypes/exports/Date management Admin.png}
-  \caption{Terminansicht (Administrator)}
+  \includegraphics{ui-prototypes/exports/Date-management-Admin.png}
+  \caption{Oberflächenprototyp Terminansicht (Administrator)}
   \label{fig:date-management-admin}
 \end{figure}
 
 \subparagraph{Termin bearbeiten}
-Durch die Schaltfläche ``Bearbeiten'', kann der Administrator den
-Zeitraum und den Kommentar des Termins bearbeiten und den Termin
-deaktivieren.
+Durch die Schaltfläche ``Bearbeiten'' kann der Administrator den Zeitraum und den Kommentar des Termins bearbeiten und den Termin deaktivieren (Abbildung \ref{fig:edit-button-pressed-no-booking}).
 \begin{figure}
   \centering
-  \includegraphics{ui-prototypes/exports/Date management Admin (Edit Button pressed, no Booking).png}
-  \caption{Termin bearbeiten}
+  \includegraphics{ui-prototypes/exports/Date-management-Admin_Edit-Button-pressed-no-Booking.png}
+  \caption{Oberflächenprototyp Termin bearbeiten}
   \label{fig:edit-button-pressed-no-booking}
 \end{figure}
-Falls eine Buchung für den Termin besteht, kann der Administrator die
-Buchung stornieren oder den Zeitraum sowie Prüfungsraum der Buchung
-festlegen.
+
+Falls eine Buchung für den Termin besteht, kann der Administrator die Buchung stornieren oder den Zeitraum sowie Prüfungsraum der Buchung festlegen (Abbildung \ref{fig:edit-button-pressed-booking}).
 \begin{figure}
   \centering
-  \includegraphics{ui-prototypes/exports/Date management Admin (Edit Button pressed, Booking present).png}
-  \caption{Termin bearbeiten - Buchung}
+  \includegraphics{ui-prototypes/exports/Date-management-Admin_Edit-Button-pressed-Booking-present.png}
+  \caption{Oberflächenprototyp Termin bearbeiten - Buchung}
   \label{fig:edit-button-pressed-booking}
 \end{figure}
-Falls eine Reservierung für den Termin besteht, kann der Administrator
-die Reservierung stornieren.
+
+Falls eine Reservierung für den Termin besteht, kann der Administrator die Reservierung stornieren (Abbildung \ref{fig:edit-button-pressed-reservation}).
 \begin{figure}
   \centering
-  \includegraphics{ui-prototypes/exports/Date management Admin (Edit Button pressed, Reservation present).png}
-  \caption{Termin bearbeiten – Reservierung}
+  \includegraphics{ui-prototypes/exports/Date-management-Admin_Edit-Button-pressed-Reservation-present.png}
+  \caption{Oberflächenprototyp Termin bearbeiten – Reservierung}
   \label{fig:edit-button-pressed-reservation}
 \end{figure}
-Falls der Termin deaktiviert ist, kann der Administrator den Termin
-wieder aktivieren.
+
+Falls der Termin deaktiviert ist, kann der Administrator den Termin wieder aktivieren (Abbildung \ref{fig:edit-button-pressed-deactivated}).
 \begin{figure}
   \centering
-  \includegraphics{ui-prototypes/exports/Date management Admin (Edit Button pressed, Deactivated).png}
-  \caption{Termin bearbeiten – Deaktiviert}
+  \includegraphics{ui-prototypes/exports/Date-management-Admin_Edit-Button-pressed-Deactivated.png}
+  \caption{Oberflächenprototyp Termin bearbeiten – Deaktiviert}
   \label{fig:edit-button-pressed-deactivated}
 \end{figure}
 
 \paragraph{Gruppenansicht}
-In der Gruppenansicht kann sich der Administrator einen Überblick über
-den Zustand der Gruppen verschaffen, sowie Gruppen mithilfe der
-entsprechenden Schaltflächen anlegen und löschen.
+In der Gruppenansicht (Abbildung \ref{fig:group-management}) kann sich der Administrator einen Überblick über den Zustand der Gruppen verschaffen, sowie Gruppen mithilfe der entsprechenden Schaltflächen anlegen und löschen.
 \begin{figure}
   \centering
-  \includegraphics{ui-prototypes/exports/Group management.png}
-  \caption{Gruppenansicht}
+  \includegraphics{ui-prototypes/exports/Group-management.png}
+  \caption{Oberflächenprototyp Gruppenansicht}
   \label{fig:group-management}
 \end{figure}
